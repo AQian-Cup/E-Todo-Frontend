@@ -16,6 +16,8 @@ export default defineConfig({
     Components({
       dts: true,
       resolvers: [RadixVueResolver()],
+      directoryAsNamespace: true,
+      version: 3,
     }),
   ],
   resolve: {
