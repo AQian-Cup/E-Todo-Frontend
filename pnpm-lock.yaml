@@ -26,6 +26,9 @@ dependencies:
   vue-router:
     specifier: ^4.2.5
     version: 4.2.5(vue@3.3.10)
+  vue-sonner:
+    specifier: ^1.0.2
+    version: 1.0.2
 
 devDependencies:
   '@iconify-json/ri':
@@ -3258,6 +3261,10 @@ packages:
     dependencies:
       '@vue/devtools-api': 6.5.1
       vue: 3.3.10(typescript@5.2.2)
+    dev: false
+
+  /vue-sonner@1.0.2:
+    resolution: {integrity: sha512-BXIyb9lGSMUjTpOukISp7oV9nrczgbfYz+TnDeoap3io3ayGXiWv+/3eQ9UKnmofwUlC4nh/H5jzBOO89lRItQ==}
     dev: false
 
   /vue-template-compiler@2.7.15:
