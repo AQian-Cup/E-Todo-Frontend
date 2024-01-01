@@ -1,5 +1,7 @@
 <template>
-  <div min-h-screen flex="~ col" items-center bg-stone-50></div>
+  <div min-h-screen flex="~ col" items-center bg-stone-50>
+    <router-view></router-view>
+  </div>
 </template>
 <script lang="ts" setup></script>
 <style scoped></style>
