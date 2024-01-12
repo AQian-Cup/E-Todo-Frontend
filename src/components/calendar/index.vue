@@ -54,7 +54,6 @@ const dayNumber = computed(() => {
   if (dayofweek) {
     result.unshift(...lastNumberList.slice(-1 * dayofweek));
   }
-  console.log(result);
   if (result.length <= 35) {
     result.push(...dayNumberList.slice(0, 35 - result.length));
   } else {
@@ -104,18 +103,5 @@ const goMonth = (number: number) => {
   calendarStore.month = result;
   return true;
 };
-watch(
-  () => calendarStore.month,
-  (newValue) => {
-    if (newValue === 13) {
-      calendarStore.year++;
-      calendarStore.month = 1;
-    }
-    if (newValue === 0) {
-      calendarStore.year--;
-      calendarStore.month = 12;
-    }
-  },
-);
 </script>
 <style scoped></style>
