@@ -107,7 +107,7 @@ const register = async () => {
     return;
   }
   try {
-    await ky.post('user/register', {
+    await ky.post('register', {
       json: {
         name: name.value,
         password: password.value,
@@ -116,7 +116,7 @@ const register = async () => {
       },
     });
   } catch (err) {
-    toast.error('注册失败');
+    toast.error((err as any).message);
     return;
   }
   await login();
@@ -124,7 +124,7 @@ const register = async () => {
 const login = async () => {
   try {
     await ky
-      .post('user/login', {
+      .post('login', {
         json: {
           name: name.value,
           password: password.value,
