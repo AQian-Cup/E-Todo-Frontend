@@ -4,6 +4,7 @@ import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import UnoCSS from 'unocss/vite';
+import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
 import RadixVueResolver from 'radix-vue/resolver';
 
@@ -13,6 +14,12 @@ export default defineConfig({
     vue(),
     vueJsx(),
     UnoCSS(),
+    AutoImport({
+      dts: true,
+      include: [/\.[tj]sx?$/, /\.vue$/, /\.vue\?vue/, /\.md$/],
+      imports: ['vue', 'vue-router', '@vueuse/core', 'pinia'],
+      vueTemplate: true,
+    }),
     Components({
       dts: true,
       resolvers: [RadixVueResolver()],
