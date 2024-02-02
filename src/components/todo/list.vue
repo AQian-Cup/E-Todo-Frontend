@@ -98,12 +98,14 @@
         </form>
       </Transition>
     </div>
+    <Toaster position="bottom-right" />
   </div>
 </template>
 <script lang="ts" setup>
 import { useCalendarStore } from '@/stores/calendar';
 import ky from '@/fetch';
 import { DateTime } from 'luxon';
+import { toast } from 'vue-sonner';
 
 interface Form {
   title: string;
@@ -166,14 +168,14 @@ const create = async () => {
     date: undefined,
     timestamp: DateTime.fromJSDate(form.value.date as Date).toUnixInteger(),
   };
-  await ky
-    .post('tasks/', {
+  try {
+    await ky.post('tasks/', {
       json: body,
-    })
-    .catch((err) => {
-      console.error(err);
     });
-  cancel();
+    cancel();
+  } catch (err: any) {
+    toast.error(err.message);
+  }
 };
 </script>
 <style scoped>
