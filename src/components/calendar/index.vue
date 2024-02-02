@@ -35,8 +35,10 @@
   </div>
 </template>
 <script lang="ts" setup>
+import ky from '@/fetch';
 import { useCalendarStore } from '@/stores/calendar';
-import { computed, watch } from 'vue';
+import type { MonthNumbers } from 'luxon';
+import { computed, watchEffect } from 'vue';
 
 const calendarStore = useCalendarStore();
 const week = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
@@ -77,12 +79,12 @@ const getSelectClass = (number: number, index: number) => {
 };
 const selectDate = (number: number, index: number) => {
   if (Math.abs((number - index) / 7) <= 1) {
-    calendarStore.day = number;
+    calendarStore.day = number as MonthNumbers;
   }
 };
 const goYear = (number: number) => {
   const result = calendarStore.year + number;
-  if (result < calendarStore.now.getFullYear()) {
+  if (result < calendarStore.now.year) {
     return false;
   }
   calendarStore.year = result;
@@ -100,8 +102,17 @@ const goMonth = (number: number) => {
     result = 1;
     goYear(1);
   }
-  calendarStore.month = result;
+  calendarStore.month = result as MonthNumbers;
   return true;
 };
+watchEffect(async () => {
+  try {
+    const json = await ky
+      .get('tasks/', { searchParams: { year: calendarStore.year, month: calendarStore.month } })
+      .json();
+  } catch (err) {
+    console.error(err);
+  }
+});
 </script>
 <style scoped></style>
