@@ -44,8 +44,8 @@ const getAvatar = async () => {
   try {
     const json = (await ky.get('users/current').json()) as { avatar?: string };
     avatar.value = json?.avatar ?? '';
-  } catch (err) {
-    toast.error((err as any).message);
+  } catch (err: any) {
+    toast.error(err.message);
   }
 };
 onMounted(async () => {
